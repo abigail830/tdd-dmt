@@ -1,8 +1,18 @@
 public class AnalysisResult {
 
     private int fileCounts = -1;
-    private boolean error;
-    private String errorMsg;
+    private boolean error = Boolean.FALSE;
+    private String errorMsg = "";
+
+    public AnalysisResult() {
+
+    }
+
+    public AnalysisResult(int fileCounts, boolean error, String errorMsg) {
+        this.fileCounts = fileCounts;
+        this.error = error;
+        this.errorMsg = errorMsg;
+    }
 
     public int getFileCounts() {
         return fileCounts;

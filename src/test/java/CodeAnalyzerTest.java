@@ -21,7 +21,7 @@ public class CodeAnalyzerTest {
     public void test_FilterCounts_ForOneFile_ShouldReturn1() {
         codeAnalyzer = new CodeAnalyzer("./src/test/fixture");
         AnalysisResult result = codeAnalyzer.filterCounts();
-        assertThat(result.getFileCounts(), is(1));
+        assertThat(result.getFileCounts(), is(3));
         assertFalse(result.isError());
     }
 
