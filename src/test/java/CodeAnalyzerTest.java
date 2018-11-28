@@ -19,7 +19,7 @@ public class CodeAnalyzerTest {
 
     @Test
     public void test_FilterCounts_ForOneFile_ShouldReturn1() {
-        codeAnalyzer = new CodeAnalyzer("./temp");
+        codeAnalyzer = new CodeAnalyzer("./src/test/fixture");
         AnalysisResult result = codeAnalyzer.filterCounts();
         assertThat(result.getFileCounts(), is(1));
         assertFalse(result.isError());
@@ -48,7 +48,7 @@ public class CodeAnalyzerTest {
 //    }
     @Test
     public void test_FilterCounts_InputNotAPath() {
-        codeAnalyzer = new CodeAnalyzer("./temp/test.txt");
+        codeAnalyzer = new CodeAnalyzer("./src/test/fixture/1.java");
         AnalysisResult result = codeAnalyzer.filterCounts();
         assertThat(result.getFileCounts(), is(-1));
         assertTrue(result.isError());
