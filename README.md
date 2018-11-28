@@ -29,3 +29,15 @@
    * Task10 清理掉不再使用的totalLineCount方法，并修改totalLineCount1方法名
    * Task11 把fileCount再重构出去
 
+## Step 4 分文件类别统计
+   * Task1 利用extract delegate分离出DirectoryScanner类
+   * Task2 增加构造器，接受DirectoryScanner参数
+   * Task3 在DirectoryScanner上抽取接口，抽取前记得把scan方法改成public
+   * Task4 修改fileCount测试，使它使用mock的DirectoryScanner，验证后再修改真实文件，反复验证此功能。
+   * Task5 抽取FileAnalyzer接口，负责处理单个文件
+   * Task6 mock FileAnalyzer，记得追加FileAnalyzerImpl的测试
+   * Task7 增加测试，修改AnalyzeResult，返回按类别分的文件个数，其中让AnalyzeResult接受Map<String,Int>作为类型文件数量的参数，但是AnalyzeResult本身发布fileTypes（）和fileCountForType(typeName)这样的方法，避免暴露内部数据结构。在实现过程中，需要获取文件后缀名，可以先设计一个FileUtil.extPath，单独做单元测试，然后实现后一举通过。
+   * Task8 修改MainApp，查看codeAnalyze目录下有多少代码量
+
+
+
