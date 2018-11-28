@@ -18,9 +18,17 @@ public class CodeAnalyzerTest {
     }
 
     @Test
-    public void test_FilterCounts_ForOneFile_ShouldReturn1() {
+    public void test_FilterCounts_ForTwoFile_ShouldReturn2() {
+        codeAnalyzer = new CodeAnalyzer("./src/test/fixture/sub1");
+        AnalysisResult result = codeAnalyzer.analysis();
+        assertThat(result.getFileCounts(), is(2));
+        assertFalse(result.isError());
+    }
+
+    @Test
+    public void test_FilterCounts_ForThreeFileInDiffSubFolder_ShouldReturn3() {
         codeAnalyzer = new CodeAnalyzer("./src/test/fixture");
-        AnalysisResult result = codeAnalyzer.filterCounts();
+        AnalysisResult result = codeAnalyzer.analysis();
         assertThat(result.getFileCounts(), is(3));
         assertFalse(result.isError());
     }
@@ -34,7 +42,7 @@ public class CodeAnalyzerTest {
     @Test
     public void test_FilterCounts_PathNotFound() {
         codeAnalyzer = new CodeAnalyzer("./temp1");
-        AnalysisResult result = codeAnalyzer.filterCounts();
+        AnalysisResult result = codeAnalyzer.analysis();
         assertThat(result.getFileCounts(), is(-1));
         assertTrue(result.isError());
         assertThat(result.getErrorMsg(), is("Path Not Found"));
@@ -49,9 +57,15 @@ public class CodeAnalyzerTest {
     @Test
     public void test_FilterCounts_InputNotAPath() {
         codeAnalyzer = new CodeAnalyzer("./src/test/fixture/1.java");
-        AnalysisResult result = codeAnalyzer.filterCounts();
+        AnalysisResult result = codeAnalyzer.analysis();
         assertThat(result.getFileCounts(), is(-1));
         assertTrue(result.isError());
         assertThat(result.getErrorMsg(), is("Path is not directory"));
+    }
+
+    @Test
+    public void test_GetTotalLineCount() {
+        codeAnalyzer = new CodeAnalyzer("./src/test/fixture");
+        assertThat(codeAnalyzer.analysis().getTotalLineCount(), is(6));
     }
 }
