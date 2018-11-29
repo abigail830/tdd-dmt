@@ -26,18 +26,19 @@ public class CodeAnalyzer {
 
         AnalysisResult result = new AnalysisResult();
         List<File> scanResult = scan();
-        result = filterCounts(result, scanResult);
-        result = getTotalLineCount(result, scanResult);
+        result.setFileList(scan());
+        result.setFileCounts(filterCounts(scanResult));
+        result.setTotalLineCount(getTotalLineCount(scanResult));
+
         return result;
     }
 
-    private AnalysisResult filterCounts(AnalysisResult result, List<File> scanResult) {
-        result.setFileCounts(scanResult.size());
-        return result;
+    private int filterCounts(List<File> scanResult) {
+        return scanResult.size();
 
     }
 
-    private AnalysisResult getTotalLineCount(AnalysisResult result, List<File> scanResult) {
+    private int getTotalLineCount(List<File> scanResult) {
 
         Optional<Integer> reduce = scanResult.stream().map(file -> {
             try {
@@ -49,9 +50,9 @@ public class CodeAnalyzer {
         }).reduce((x, y) -> x + y);
 
         if (reduce.isPresent())
-            result.setTotalLineCount(reduce.get());
+            return reduce.get();
 
-        return result;
+        return -1;
     }
 
     private List<File> scan() {
